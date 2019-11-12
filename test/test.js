@@ -107,7 +107,7 @@ describe('todos', () => {
   });
 
   describe('readAll', () => {
-    it('should return an empty array when there are no todos', (done) => {
+    xit('should return an empty array when there are no todos', (done) => {
       todos.readAll((err, todoList) => {
         expect(err).to.be.null;
         expect(todoList.length).to.equal(0);
@@ -116,7 +116,7 @@ describe('todos', () => {
     });
 
     // Refactor this test when completing `readAll`
-    it('should return an array with all saved todos', (done) => {
+    xit('should return an array with all saved todos', (done) => {
       const todo1text = 'todo 1';
       const todo2text = 'todo 2';
       const expectedTodoList = [{ id: '00001', text: '00001' }, { id: '00002', text: '00002' }];
@@ -134,14 +134,14 @@ describe('todos', () => {
   });
 
   describe('readOne', () => {
-    it('should return an error for non-existant todo', (done) => {
+    xit('should return an error for non-existant todo', (done) => {
       todos.readOne('notAnId', (err, todo) => {
         expect(err).to.exist;
         done();
       });
     });
 
-    it('should find a todo by id', (done) => {
+    xit('should find a todo by id', (done) => {
       const todoText = 'buy chocolate';
       todos.create(todoText, (err, createdTodo) => {
         const id = createdTodo.id;
@@ -158,7 +158,7 @@ describe('todos', () => {
       todos.create('original todo', done);
     });
 
-    it('should not change the counter', (done) => {
+    xit('should not change the counter', (done) => {
       todos.update('00001', 'updated todo', (err, todo) => {
         const counterFileContents = fs.readFileSync(counter.counterFile).toString();
         expect(counterFileContents).to.equal('00001');
@@ -166,7 +166,7 @@ describe('todos', () => {
       });
     });
 
-    it('should update the todo text for existing todo', (done) => {
+    xit('should update the todo text for existing todo', (done) => {
       const todoId = '00001';
       const updatedTodoText = 'updated todo';
       todos.update(todoId, updatedTodoText, (err, todo) => {
@@ -176,7 +176,7 @@ describe('todos', () => {
       });
     });
 
-    it('should not create a new todo for non-existant id', (done) => {
+    xit('should not create a new todo for non-existant id', (done) => {
       const initalTodoCount = fs.readdirSync(todos.dataDir).length;
       todos.update('00017', 'bad id', (err, todo) => {
         const currentTodoCount = fs.readdirSync(todos.dataDir).length;
@@ -192,7 +192,7 @@ describe('todos', () => {
       todos.create('delete this todo', done);
     });
 
-    it('should not change the counter', (done) => {
+    xit('should not change the counter', (done) => {
       todos.delete('00001', (err) => {
         const counterFileContents = fs.readFileSync(counter.counterFile).toString();
         expect(counterFileContents).to.equal('00001');
@@ -200,7 +200,7 @@ describe('todos', () => {
       });
     });
 
-    it('should delete todo file by id', (done) => {
+    xit('should delete todo file by id', (done) => {
       todos.delete('00001', (err) => {
         const todoExists = fs.existsSync(path.join(todos.dataDir, '00001.txt'));
         expect(todoExists).to.be.false;
@@ -208,7 +208,7 @@ describe('todos', () => {
       });
     });
 
-    it('should return an error for non-existant id', (done) => {
+    xit('should return an error for non-existant id', (done) => {
       const initalTodoCount = fs.readdirSync(todos.dataDir).length;
       todos.delete('07829', (err) => {
         const currentTodoCount = fs.readdirSync(todos.dataDir).length;
