@@ -75,34 +75,22 @@ exports.update = (id, text, callback) => {
       callback(err, {id, text});
       })
     } else {
-      callback(new Error("update error"), null);
+      callback(new Error(`update error: no item with id: ${id}`), null);
     };
   });
-
-
-
-
-
-
-
-  // var item = items[id];
-  // if (!item) {
-  //   callback(new Error(`No item with id: ${id}`));
-  // } else {
-  //   items[id] = text;
-  //   callback(null, { id, text });
-  // }
 };
 
 exports.delete = (id, callback) => {
-  var item = items[id];
-  delete items[id];
-  if (!item) {
-    // report an error if item not found
+  let todoPath = path.join(exports.dataDir, id + '.txt');
+  fs.access(todoPath, fs.constants.F_OK, (err) => {
+   if (err) {
     callback(new Error(`No item with id: ${id}`));
-  } else {
-    callback();
-  }
+   } else {
+    fs.unlink(todoPath, (err) => {
+      callback(err);
+    });
+   }
+  });
 };
 
 // Config+Initialization code -- DO NOT MODIFY /////////////////////////////////
