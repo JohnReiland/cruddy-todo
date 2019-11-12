@@ -22,7 +22,7 @@ const readCounter = (callback) => {
     } else {
       let data;
       if (fileData.length === 0) {
-        data = '1';
+        data = '0';
       } else {
         data = fileData.toString();
       }
@@ -51,7 +51,7 @@ exports.getNextUniqueId = (callback) => {
   readCounter((err, num) => {
     if (err) {
       error = new Error('error reading counter and ' + err.toString());
-      console.log(error);
+      //console.log(error);
     } else {
       counter = num;
       counter = counter + 1;
