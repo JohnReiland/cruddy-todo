@@ -39,16 +39,17 @@ exports.readAll = () => {
       let promises = [];
       for (var i = 0; i < files.length; i++) {
         let split = files[i].split('.');
+        console.log(files[i]);
         let el = split[0];
         data.push({id: el, text: null});
-        promises.push((Promise.promisify(fs.readFile))(files[i]));
+        promises.push((Promise.promisify(fs.readFile))(path.join(exports.dataDir, files[i])));
       }
       return promises;
     })
     .then((promises) => (Promise.all(promises)))
     .then((texts) => {
       for (var i = 0; i < texts.length; i++) {
-        data[i].text = texts[i];
+        data[i].text = texts[i].toString();
       }
       return data;
     });
