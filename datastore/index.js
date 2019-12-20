@@ -9,7 +9,7 @@ var items = {};
 // Public API - Fix these CRUD functions ///////////////////////////////////////
 
 exports.create = (text, callback) => {
-  var id, error;
+  var id; var error;
   counter.getNextUniqueId((err, num) => {
     id = num;
     error = err;
